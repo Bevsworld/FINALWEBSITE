@@ -67,9 +67,7 @@ function App() {
             try {
                 const response = await fetch('https://apiserver-real.onrender.com/ytvids');
                 const data = await response.json();
-                // Filter valid videos with defined links
-                const validVideos = data.filter(video => video.type === 'video' && video.link);
-                setYoutubeVideos(validVideos);
+                setYoutubeVideos(data.filter(video => video.type === 'video'));
             } catch (error) {
                 console.error('Error fetching YouTube videos:', error);
             } finally {
