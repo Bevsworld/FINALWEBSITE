@@ -1,31 +1,43 @@
 // src/TweetCard.js
 import React, { useState } from 'react';
-import { Card, Header, Avatar, UserInfo, Handle, Content, Footer, ViewMore } from './styles';
+import { formatDistanceToNow } from 'date-fns';
+import {
+    TweetCardWrapper,
+    TweetHeader,
+    TweetAvatar,
+    TweetUserInfo,
+    TweetHandle,
+    TweetContent,
+    TweetFooter,
+    TweetViewMore,
+    TweetTimeSinceUpload,
+} from './styles';
 
 const TweetCard = ({ avatar, handle, content, time }) => {
     const [expanded, setExpanded] = useState(false);
 
+    const timeAgo = formatDistanceToNow(new Date(time), { addSuffix: true });
+
     return (
-        <Card expanded={expanded}>
-            <Header>
-                <Avatar src={avatar} alt="Avatar" />
-                <UserInfo>
-                    <Handle>@{handle}</Handle>
-                </UserInfo>
-            </Header>
-            <Content>
-                {expanded ? content : content.substring(0, 120)}
-                {content.length > 120 && !expanded && '...'}
-            </Content>
-            <Footer>
-                <span>{time}</span>
-            </Footer>
-            {content.length > 120 && (
-                <ViewMore onClick={() => setExpanded(!expanded)}>
-                    {expanded ? 'View less' : 'View more'}
-                </ViewMore>
-            )}
-        </Card>
+        <TweetCardWrapper expanded={expanded}>
+            <TweetHeader>
+                <TweetAvatar src={avatar} alt="Avatar" />
+                <TweetUserInfo>
+                    <TweetHandle>@{handle}</TweetHandle>
+                </TweetUserInfo>
+            </TweetHeader>
+            <TweetContent expanded={expanded}>
+                {expanded ? content : `${content.substring(0, 120)}...`}
+                {content.length > 120 && (
+                    <TweetViewMore onClick={() => setExpanded(!expanded)}>
+                        {expanded ? 'Read less' : 'Read more'}
+                    </TweetViewMore>
+                )}
+            </TweetContent>
+            <TweetFooter>
+                <TweetTimeSinceUpload>{timeAgo}</TweetTimeSinceUpload>
+            </TweetFooter>
+        </TweetCardWrapper>
     );
 };
 
