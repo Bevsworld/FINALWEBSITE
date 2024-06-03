@@ -25,7 +25,7 @@ export const CardGridWrapper = styled.div`
 
 export const CardGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     width: 100%;
 `;
@@ -90,17 +90,11 @@ export const Card = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     position: relative;
-    transition: transform 0.3s;
-    max-width: 300px;
-
-    &:hover {
-        transform: translateY(-10px);
-    }
 `;
 
 export const ImageContainer = styled.div`
@@ -130,14 +124,8 @@ export const Placeholder = styled.div`
     font-size: 1.2em;
 `;
 
-export const Content = styled.div`
-    margin: 10px 0;
-    max-height: ${props => (props.expanded ? 'none' : '100px')}; // Adjusted max-height
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    padding-bottom: 10px; // Added padding-bottom
+export const Content = styled.p`
+    margin: 10px 0 0;
 `;
 
 export const Footer = styled.div`
@@ -145,15 +133,12 @@ export const Footer = styled.div`
     justify-content: space-between;
     color: grey;
     align-items: center;
-    width: 100%;
-    padding: 10px 0;
 `;
 
 export const Header = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    width: 100%;
 `;
 
 export const Avatar = styled.img`
@@ -170,15 +155,14 @@ export const UserInfo = styled.div`
 
 export const Handle = styled.span`
     color: grey;
-    font-weight: bold;
-    font-size: 1em;
 `;
 
 export const ViewMore = styled.span`
     color: #007bff;
     cursor: pointer;
-    display: inline-block;
-    margin-left: 5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 `;
 
 export const VideoContainer = styled.div`
@@ -231,12 +215,3 @@ export const ProfileName = styled.span`
     font-weight: bold;
 `;
 
-export const TimeSinceUpload = styled.span`
-    font-size: 0.9em;
-    color: grey;
-`;
-
-export const InstagramHandle = styled.span`
-    font-size: 0.9em;
-    color: grey;
-`;

@@ -1,22 +1,9 @@
 // src/TweetCard.js
 import React, { useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
-import {
-    Card,
-    Header,
-    Avatar,
-    UserInfo,
-    Handle,
-    Content,
-    Footer,
-    ViewMore,
-    TimeSinceUpload,
-} from './styles';
+import { Card, Header, Avatar, UserInfo, Handle, Content, Footer, ViewMore } from './styles';
 
 const TweetCard = ({ avatar, handle, content, time }) => {
     const [expanded, setExpanded] = useState(false);
-
-    const timeAgo = formatDistanceToNow(new Date(time), { addSuffix: true });
 
     return (
         <Card expanded={expanded}>
@@ -31,7 +18,7 @@ const TweetCard = ({ avatar, handle, content, time }) => {
                 {content.length > 120 && !expanded && '...'}
             </Content>
             <Footer>
-                <TimeSinceUpload>{timeAgo}</TimeSinceUpload>
+                <span>{time}</span>
             </Footer>
             {content.length > 120 && (
                 <ViewMore onClick={() => setExpanded(!expanded)}>

@@ -1,27 +1,13 @@
 // src/InstagramCard.js
 import React, { useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
-import {
-    Card,
-    ImageContainer,
-    Image,
-    Placeholder,
-    Content,
-    Footer,
-    TimeSinceUpload,
-    InstagramHandle,
-    ViewMore
-} from './styles';
+import { Card, ImageContainer, Image, Placeholder, Content, Footer } from './styles';
 
 const InstagramCard = ({ content, imageUrl, time, handle }) => {
     const [imageError, setImageError] = useState(false);
-    const [expanded, setExpanded] = useState(false);
 
     const handleError = () => {
         setImageError(true);
     };
-
-    const timeAgo = formatDistanceToNow(new Date(time), { addSuffix: true });
 
     return (
         <Card>
@@ -32,17 +18,10 @@ const InstagramCard = ({ content, imageUrl, time, handle }) => {
                     <Image src={imageUrl} alt="Instagram post" onError={handleError} />
                 )}
             </ImageContainer>
-            <Content expanded={expanded}>
-                {expanded ? content : `${content.substring(0, 50)}...`}
-                {content.length > 50 && (
-                    <ViewMore onClick={() => setExpanded(!expanded)}>
-                        {expanded ? 'Read less' : 'Read more'}
-                    </ViewMore>
-                )}
-            </Content>
+            <Content>{content}</Content>
             <Footer>
-                <TimeSinceUpload>{timeAgo}</TimeSinceUpload>
-                <InstagramHandle>@{handle}</InstagramHandle>
+                <span>{time}</span>
+                <span>@{handle}</span>
             </Footer>
         </Card>
     );
