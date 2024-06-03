@@ -2,15 +2,15 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import {
-    InstagramCardWrapper,
-    InstagramImageContainer,
-    InstagramImage,
-    InstagramPlaceholder,
-    InstagramContent,
-    InstagramFooter,
-    InstagramTimeSinceUpload,
+    Card,
+    ImageContainer,
+    Image,
+    Placeholder,
+    Content,
+    Footer,
+    TimeSinceUpload,
     InstagramHandle,
-    InstagramViewMore
+    ViewMore
 } from './styles';
 
 const InstagramCard = ({ content, imageUrl, time, handle }) => {
@@ -24,27 +24,27 @@ const InstagramCard = ({ content, imageUrl, time, handle }) => {
     const timeAgo = formatDistanceToNow(new Date(time), { addSuffix: true });
 
     return (
-        <InstagramCardWrapper>
-            <InstagramImageContainer>
+        <Card>
+            <ImageContainer>
                 {imageError ? (
-                    <InstagramPlaceholder>Image not available</InstagramPlaceholder>
+                    <Placeholder>Image not available</Placeholder>
                 ) : (
-                    <InstagramImage src={imageUrl} alt="Instagram post" onError={handleError} />
+                    <Image src={imageUrl} alt="Instagram post" onError={handleError} />
                 )}
-            </InstagramImageContainer>
-            <InstagramContent expanded={expanded}>
+            </ImageContainer>
+            <Content expanded={expanded}>
                 {expanded ? content : `${content.substring(0, 50)}...`}
                 {content.length > 50 && (
-                    <InstagramViewMore onClick={() => setExpanded(!expanded)}>
+                    <ViewMore onClick={() => setExpanded(!expanded)}>
                         {expanded ? 'Read less' : 'Read more'}
-                    </InstagramViewMore>
+                    </ViewMore>
                 )}
-            </InstagramContent>
-            <InstagramFooter>
-                <InstagramTimeSinceUpload>{timeAgo}</InstagramTimeSinceUpload>
+            </Content>
+            <Footer>
+                <TimeSinceUpload>{timeAgo}</TimeSinceUpload>
                 <InstagramHandle>@{handle}</InstagramHandle>
-            </InstagramFooter>
-        </InstagramCardWrapper>
+            </Footer>
+        </Card>
     );
 };
 
